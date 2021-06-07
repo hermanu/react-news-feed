@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
     <img src="./client/public/MERN.png" alt="mongo" height="100" />
 </p>
 <h1 align="center">BOILERPLATE</h1>
@@ -73,4 +73,4 @@ Open [http://localhost:3000](http://localhost:3000) to view React App in the bro
 
 ## LICENSE
 
-[MIT LICENSE](LICENSE)
+[MIT LICENSE](LICENSE) -->

@@ -1,48 +1,13 @@
-import React from 'react';
-import logo from '../logo.svg';
-import './styles/App.css';
+import "./styles/App.css";
+import NewsList from "../components/views/NewsList";
+import { Container } from "@material-ui/core";
+import React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>client/src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React 17
-        </a>
-        <p>
-          Edit <code>routes/api/crud.js</code> for adding Backend APIs.<br/>
-          View existing APIs at <a className="App-link"
-          href="http://localhost:5000/api/v1/get"
-          target="_blank"
-          rel="noopener noreferrer">/api/v1/...</a>
-        </p>
-        <a 
-          className="App-link"
-          href="https://github.com/GauravWalia19/MernBoilerPlate"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          MERN Boilerplate 1.0.0
-        </a>
-        <br />
-        <a 
-          className="App-link"
-          href="https://www.heroku.com/"
-          target="_blank"
-          rel="noopener noreferrer">
-          Deploy on Heroku
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <NewsList />
+    </Container>
   );
 }
 
