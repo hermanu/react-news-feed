@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 // import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import SimpleAccordion from "./Content";
+
 import parse from "html-react-parser";
 
 const useStyles = makeStyles({
@@ -19,11 +21,17 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 14,
-    marginBottom: 12,
+    marginBottom: 8,
     marginTop: 30,
   },
-  pos: {
-    marginBottom: 12,
+  content: {
+    marginBottom: 10,
+    "& p": {
+      textOverflow: "hidden",
+    },
+  },
+  date: {
+    fontSize: 12,
   },
 });
 
@@ -33,14 +41,21 @@ export default function OutlinedCard({ feed }) {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography className={classes.title} color="textSecondary">
+        <Typography
+          className={classes.title}
+          component="h2"
+          variant="subtitle1"
+          color="textPrimary"
+        >
           {feed.description}
         </Typography>
-        <Typography variant="body2" component="p">
-          {parse(feed.content)}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Fecha de publicacion: {new Date(feed.date).toLocaleDateString()}
+        <SimpleAccordion content={parse(feed.content)} />
+        <Typography
+          className={classes.date}
+          component="p"
+          color="textSecondary"
+        >
+          {new Date(feed.date).toLocaleDateString()} / {feed.author}
         </Typography>
       </CardContent>
     </Card>

@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { GridList, Breadcrumbs, Link } from "@material-ui/core";
 import { GridListTile, GridListTileBar, IconButton } from "@material-ui/core";
-import { SaveAlt } from "@material-ui/icons";
+import { SaveAlt, DeleteForever } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -30,23 +30,33 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: "white",
   },
+  link: {
+    cursor: "pointer",
+  },
 }));
+
+const hostUrl = `http://localhost:5000/api/v1`;
 
 const NewsList = (props) => {
   const [newsFeedList, setNewFeedList] = useState([]);
 
   useEffect(() => {
-    getData();
+    getFeedList();
   }, []);
 
-  async function getData() {
-    await axios.get("http://localhost:5000/api/v1/feed").then((response) => {
+  async function getFeedList() {
+    await axios.get(`${hostUrl}/feed`).then((response) => {
       setNewFeedList(response.data);
     });
   }
-  const handleClick = (e) => {
-    alert("hi");
-  };
+
+  async function getArchivedFeedList() {
+    await axios
+      .get("http://localhost:5000/api/v1/feed/archived")
+      .then((response) => {
+        setNewFeedList(response.data);
+      });
+  }
 
   const toggleArchived = async (feed) => {
     feed.archived = !feed.archived;
@@ -54,15 +64,24 @@ const NewsList = (props) => {
     await axios.patch(`http://localhost:5000/api/v1/feed/${feed._id}`, feed);
   };
 
+  const removeFeed = async (id) => {
+    setNewFeedList(newsFeedList.filter((feed) => feed._id !== id));
+    await axios.delete(`http://localhost:5000/api/v1/feed/${id}`);
+  };
+
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" href="/" onClick={handleClick}>
+        <Link color="inherit" onClick={getFeedList} className={classes.link}>
           News
         </Link>
-        <Link color="inherit" href="/archived">
+        <Link
+          color="inherit"
+          onClick={getArchivedFeedList}
+          className={classes.link}
+        >
           Archived
         </Link>
       </Breadcrumbs>
@@ -73,13 +92,23 @@ const NewsList = (props) => {
               title={feed.title}
               titlePosition="top"
               actionIcon={
-                <IconButton
-                  aria-label={`star ${feed.title}`}
-                  className={classes.icon}
-                  onClick={() => toggleArchived(feed)}
-                >
-                  <SaveAlt />
-                </IconButton>
+                !feed.archived ? (
+                  <IconButton
+                    aria-label={`${feed.title}`}
+                    className={classes.icon}
+                    onClick={() => toggleArchived(feed)}
+                  >
+                    <SaveAlt />
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    aria-label={`${feed.title}`}
+                    className={classes.icon}
+                    onClick={() => removeFeed(feed._id)}
+                  >
+                    <DeleteForever />
+                  </IconButton>
+                )
               }
               actionPosition="left"
               className={classes.titleBar}

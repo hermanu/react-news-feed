@@ -4,12 +4,20 @@ const FeedHelper = require("../helpers/Feed.Helper");
 // Create Feed
 const createFeed = async (feed) => {
   try {
+    // const validFeedReddit = {
+    //   title: feed.title,
+    //   description: feed.title,
+    //   date: feed.pubDate,
+    //   author: decodeURI(feed.author.toString()),
+    //   content: decodeURI(feed.content.toString()).replace("submitted by", ""),
+    // };
+
     const validFeed = {
       title: feed.title,
       description: feed.title,
       date: feed.pubDate,
-      author: decodeURI(feed.author.toString()),
-      content: decodeURI(feed.content.toString()).replace("submitted by", ""),
+      author: feed.creator.replace("redaccion@20minutos.es", ""),
+      content: feed.content || feed["content:encoded"],
     };
     const newFeed = new FeedModel(validFeed);
     await newFeed.save();
@@ -28,11 +36,20 @@ const getFeedList = async () => {
   }
 };
 
-//Update feedById
+//Get archived feed list
+const getArchivedFeedList = async () => {
+  try {
+    return await FeedModel.find({ archived: true }).sort({ archivedDate: -1 });
+  } catch (error) {
+    console.log("getFeedList Error", error);
+  }
+};
 
-const updateFeedById = async (id, feed) => {
+//Archive feed
+const archiveFeed = async (id) => {
   try {
     const filter = { _id: id };
+    const feed = { archived: true, archivedDate: new Date() };
     const updatedFeed = await FeedModel.findOneAndUpdate(filter, feed, {
       new: true,
     });
@@ -55,9 +72,20 @@ const updateFeedList = async () => {
   }
 };
 
+//Delete feed by Id
+const deleteFeedById = async (id) => {
+  try {
+    return await FeedModel.findByIdAndDelete(id);
+  } catch (error) {
+    console.log("DeleteFeedById error", error);
+  }
+};
+
 module.exports = {
   getFeedList,
+  getArchivedFeedList,
   createFeed,
   updateFeedList,
-  updateFeedById,
+  archiveFeed,
+  deleteFeedById,
 };
