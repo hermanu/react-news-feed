@@ -4,33 +4,26 @@ const FeedHelper = require("../helpers/Feed.Helper");
 // Create Feed
 const createFeed = async (feed) => {
   try {
-    // const validFeedReddit = {
-    //   title: feed.title,
-    //   description: feed.title,
-    //   date: feed.pubDate,
-    //   author: decodeURI(feed.author.toString()),
-    //   content: decodeURI(feed.content.toString()).replace("submitted by", ""),
-    // };
-
     const validFeed = {
       title: feed.title,
-      description: feed.title,
+      description: feed.description,
       date: feed.pubDate,
-      author: feed.creator.replace("redaccion@20minutos.es", ""),
-      content: feed.content || feed["content:encoded"],
+      author: feed.author,
+      content: feed.content,
+      date: feed.date || new Date(),
     };
     const newFeed = new FeedModel(validFeed);
     await newFeed.save();
     return newFeed;
   } catch (error) {
-    console.log("CreateFeed Error", error);
+    throw new Error(error);
   }
 };
 
 //Get feed list
 const getFeedList = async () => {
   try {
-    return await FeedModel.find({ archived: false });
+    return await FeedModel.find({ archived: false }).sort({ createdAt: -1 });
   } catch (error) {
     console.log("getFeedList Error", error);
   }
@@ -39,7 +32,10 @@ const getFeedList = async () => {
 //Get archived feed list
 const getArchivedFeedList = async () => {
   try {
-    return await FeedModel.find({ archived: true }).sort({ archivedDate: -1 });
+    const archivedFeedList = await FeedModel.find({ archived: true }).sort({
+      archivedDate: -1,
+    });
+    return archivedFeedList;
   } catch (error) {
     console.log("getFeedList Error", error);
   }
@@ -63,8 +59,11 @@ const updateFeedList = async () => {
   try {
     const newFeedList = await FeedHelper.getRssFeed();
 
+    // check if already exist
+
     for (const feed of newFeedList) {
-      await createFeed(feed);
+      const filter = { guid: feed.guid };
+      await FeedModel.findOneAndUpdate(filter, feed, { new: true });
     }
     return await FeedModel.find();
   } catch (error) {

@@ -54,4 +54,14 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Updates news feed list
+router.post("/", async (req, res) => {
+  try {
+    const response = await FeedController.createFeed(req.body);
+    res.send(response);
+  } catch (error) {
+    console.log("Router post createFeed error", error);
+  }
+});
+
 module.exports = router;
