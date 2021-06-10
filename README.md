@@ -1,76 +1,57 @@
-<!-- <p align="center">
-    <img src="./client/public/MERN.png" alt="mongo" height="100" />
-</p>
-<h1 align="center">BOILERPLATE</h1>
+# News Feed Finametrix
 
-This is a boilerplate repo for creating new mern stack apps that doesn't sucks.
+### Steps to Run on Docker
 
-This is minimalist boilerplate for Full Stack MERN developers *(Recommended for beginners only)*. This boilerplate provides basic configurations like:
+1. Clone this repository
 
-* Sample CRUD API
-* Create-react-app boilerplate
-* NPM Scripts needed for MERN Stack
-* Sample mongoose connection provided for connecting API with database like mongodb
-* Heroku Deployment Configurations
+   > git clone https://github.com/hermanu/finametrix-app
 
-## Available Scripts
+2. Navigate into the directory
 
-For APIs to work in development please add a **.env** file in root of the project and add your **MONGODB_URI** in that file.
+   > cd finametrix-app
 
-### `yarn start`
+3. Create a .env file in the Server folder and add MONGODB_URI=mongodb://mongo:27017/finametrix
 
-Runs the server in the production mode.<br />
-Open [http://localhost:5000/api/v1/get](http://localhost:5000/api/v1/get) to view sample CRUD API output from server in the browser.
+   > touch ./server/.env
 
-### `yarn run dev`
+4. Add MONGODB_URI param to ./server/.env file
 
-Runs the server in the development mode.<br />
-Open [http://localhost:5000/api/v1/get](http://localhost:5000/api/v1/get) to view sample CRUD API output from server in the browser.
+   > MONGODB_URI=mongodb://mongo:27017/finametrix
 
-The server will auto restart if you make any changes.
+5. Build up Docker Images and rund the stack
 
-### `yarn run client`
+   > docker compose up
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Your app should be running on (if using native docker).:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+React-App is running on [http://localhost:3000](http://localhost:3000)
 
-### `yarn run mern`
+Be patient and wait for all for all of the NPM warnings to finish.
 
-Runs the **server** and the **client** at the **same time** that makes MERN Stack development easier.<br>
+### Steps to Run local
 
-Open [http://localhost:5000/api/v1/get](http://localhost:5000/api/v1/get) to view sample CRUD API output from server in the browser.<br>
+1. Clone this repository
 
-Open [http://localhost:3000](http://localhost:3000) to view React App in the browser.
+   > git clone https://github.com/hermanu/finametrix-app
 
-## Steps for Heroku Deployment
+2. Navigate into the directory
 
-### Dependencies
+   > cd finametrix-app
 
-* nodejs
-* yarn package manager
-* heroku cli
+3. Create a .env file
 
-### Deployment Steps
+   > touch .env
 
-1. Check whether you have heroku installed in you PC or not using `heroku --version` command. If you don't have then you can install it from [here](https://devcenter.heroku.com/articles/heroku-cli).
+4. Add MONGODB_URI param to .env file
 
-2. Create your account if you don't have any.
+   > MONGODB_URI=mongodb://localhost:27017/finametrix
 
-3. Then open the terminal or cmd in root directory and make sure you have created a git repository for your project. Remove **.git** directory if present in **client** folder otherwise it may lead to deployment issues.
+5. Run mern script to start client and server
 
-4. **All the heroku build deployment scripts are provided you can review and update the engine in root package.json if you want to deploy with any other version of node and yarn** .
+   > yarn run mern
 
-5. Then login your heroku account using `heroku login`.
+NodeJs server is running on [http://localhost:5000/api/v1](http://localhost:5000/api/v1)
 
-6. After login its time to create a new app with you app name using `heroku create <your unique app name>`. If you get name already used then you have to choose any other unique name.
+React-App is running on [http://localhost:3000](http://localhost:3000)
 
-7. Now open the heroku account in the browser, you will see your app is created. Then open the settings of the app and in the config vars add **heroku variables** like **MONGODB_URI**.
-
-8. For deployment run `git push heroku master` and it will deploy your app on heroku.
-
-## LICENSE
-
-[MIT LICENSE](LICENSE) -->
+### Anotaciones

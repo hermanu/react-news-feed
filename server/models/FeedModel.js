@@ -33,8 +33,14 @@ const Feed = new Schema(
       type: Date,
       required: false,
     },
+    // guid: {
+    //   type: String,
+    //   requied: true,
+    // },
   },
   { timestamps: true }
 );
+
+// Feed.index({ guid: 1 }, { unique: true });
 
 module.exports = mongoose.model("Feed", Feed);
