@@ -35,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 30,
   },
   content: {
-    // display: "flex",
-    // flexWrap: "wrap",
     textOverflow: "ellipsis",
     justifyContent: "space-around",
     overflow: "hidden",
@@ -48,8 +46,6 @@ const useStyles = makeStyles((theme) => ({
       transform: "translateZ(0)",
     },
     "& p": {
-      // border: "1px solid",
-      // padding: "2px 5px",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -61,21 +57,21 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 5,
   },
 }));
+const hostUrl = `http://localhost:5000/api/v1`;
 
-export default function OutlinedCard({ feed }) {
+export default function Feed({ feed }) {
   const [feeds, setFeeds] = useContext(FeedContext);
   const classes = useStyles();
-  // const preventDefault = (event) => event.preventDefault();
 
   const toggleArchived = async (feed) => {
     feed.archived = !feed.archived;
+    await axios.put(`${hostUrl}/feed/${feed._id}`, feed);
     setFeeds(feeds.filter((feed) => !feed.archived));
-    await axios.patch(`http://localhost:5000/api/v1/feed/${feed._id}`, feed);
   };
 
   const removeFeed = async (id) => {
+    await axios.delete(`${hostUrl}/feed/${id}`);
     setFeeds(feeds.filter((feed) => feed._id !== id));
-    await axios.delete(`http://localhost:5000/api/v1/feed/${id}`);
   };
 
   return (
