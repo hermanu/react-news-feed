@@ -1,67 +1,73 @@
 const express = require("express");
 const router = express.Router();
+
 const FeedController = require("../../controllers/Feed.Controller");
 
-//Get news feed list
-router.get("/", async (req, res) => {
+// Create new feed list
+router.post("/", async (req, res, next) => {
+  let response;
   try {
-    const response = await FeedController.getFeedList();
+    response = await new FeedController().createFeed(req.body);
+  } catch (error) {
+    next(error);
+  }
+  res.send(response);
+});
+
+//Get news feed list
+router.get("/", async (req, res, next) => {
+  try {
+    const response = await new FeedController().getNewsFeedList();
     res.send(response);
   } catch (error) {
-    console.log("Router get / error", error);
+    next(error);
   }
 });
 
 //Get archived feed list
-router.get("/archived", async (req, res) => {
+router.get("/archived", async (req, res, next) => {
   try {
-    const response = await FeedController.getArchivedFeedList();
+    const response = await new FeedController().getArchivedFeedList();
     res.send(response);
   } catch (error) {
-    console.log("Router get / error", error);
+    next(error);
   }
 });
 
-// Updates news feed list
-router.post("/update", async (req, res) => {
-  try {
-    const response = await FeedController.updateFeedList();
-    res.send(response);
-  } catch (error) {
-    console.log("Router post /update error", error);
-  }
-});
-
-//Archive new feed
-router.patch("/:id", async (req, res) => {
+//Update new feed
+router.put("/:id", async (req, res, next) => {
+  let response;
   try {
     const id = req.params.id;
-    const response = await FeedController.archiveFeed(id);
-    res.send(response);
+    const feed = req.body;
+    response = await new FeedController().updateFeed(id, feed);
   } catch (error) {
-    console.log("Router patch /id error", error);
+    next(error);
   }
+  res.send(response);
 });
 
 //Delete new feed
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
+  let response;
   try {
     const id = req.params.id;
-    const response = await FeedController.deleteFeedById(id);
-    res.send(response);
+    response = await new FeedController().deleteFeed(id);
   } catch (error) {
-    console.log("Router patch /id error", error);
+    next(error);
   }
+  res.send(response);
 });
 
-// Updates news feed list
-router.post("/", async (req, res) => {
-  try {
-    const response = await FeedController.createFeed(req.body);
-    res.send(response);
-  } catch (error) {
-    console.log("Router post createFeed error", error);
-  }
-});
+// Not needed (commented just in case)
+// // Updates news feed list
+// router.post("/update", async (req, res) => {
+//   try {
+//     const response = await FeedController.updateFeedList();
+//     res.send(response);
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// });
 
 module.exports = router;
