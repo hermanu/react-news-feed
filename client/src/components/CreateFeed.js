@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import { FeedContext } from "./FeedContext";
+import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 const hostUrl = `http://localhost:5000/api/v1`;
@@ -23,6 +24,7 @@ const defaultValues = {
 };
 
 export default function CreateFeed() {
+  const history = useHistory();
   const classes = useStyles();
   const [feeds, setFeeds, showCreate, setShowCreate] = useContext(FeedContext);
   const [formValues, setFormValues] = useState(defaultValues);
@@ -32,6 +34,7 @@ export default function CreateFeed() {
     await createFeed(formValues);
     setFormValues(defaultValues);
     setShowCreate(!showCreate);
+    history.push("/"); // Forced to go NewsFeedList
   };
 
   const handleInputChange = (e) => {

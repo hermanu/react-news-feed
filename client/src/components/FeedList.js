@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { GridList, Breadcrumbs, Link as MuiLink } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-import NewsFeed from "./Feed";
+import Feed from "./Feed";
 import CreateFeed from "./CreateFeed";
 import { FeedContext } from "./FeedContext";
 
@@ -24,7 +24,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const FeedList = () => {
-  const [feeds, showCreate, setShowCreate] = useContext(FeedContext);
+  // eslint-disable-next-line
+  const [feeds, setFeeds, showCreate, setShowCreate] = useContext(FeedContext);
 
   const toggleShowForm = () => {
     setShowCreate(!showCreate);
@@ -49,7 +50,7 @@ const FeedList = () => {
 
       <GridList cellHeight={200} spacing={1} className={classes.gridList}>
         {feeds.map((feed) => (
-          <NewsFeed key={feed._id} feed={feed} />
+          <Feed key={feed._id} feed={feed} />
         ))}
       </GridList>
     </div>

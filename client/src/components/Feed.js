@@ -13,9 +13,6 @@ import { SaveAlt, DeleteForever } from "@material-ui/icons";
 
 import axios from "axios";
 import { FeedContext } from "./FeedContext";
-// import SimpleAccordion from "./Content";
-
-// import parse from "html-react-parser";
 
 const useStyles = makeStyles((theme) => ({
   root: {
