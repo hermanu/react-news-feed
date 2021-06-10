@@ -1,24 +1,23 @@
 import React, { useContext, useEffect } from "react";
-import axios from "axios";
 
 import FeedList from "../FeedList";
 import { FeedContext } from "../FeedContext";
-
+import axios from "axios";
 const hostUrl = `http://localhost:5000/api/v1`;
 
-const NewsFeedList = () => {
+const ArchivedFeedList = () => {
   const [feeds, setFeeds] = useContext(FeedContext);
+
   useEffect(() => {
-    getFeedList();
+    getArchivedFeedList();
   }, []);
 
-  async function getFeedList() {
-    await axios.get(`${hostUrl}/feed`).then((response) => {
+  async function getArchivedFeedList() {
+    await axios.get(`${hostUrl}/feed/archived`).then((response) => {
       setFeeds(response.data);
     });
   }
-
   return <FeedList feeds={feeds} />;
 };
 
-export default NewsFeedList;
+export default ArchivedFeedList;

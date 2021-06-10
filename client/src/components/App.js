@@ -1,6 +1,6 @@
 import "./styles/App.css";
-import NewsList from "../components/views/NewsFeedList";
-// import ArchivedList from "../components/views/ArchivedFeedList";
+import NewsFeedList from "../components/views/NewsFeedList";
+import ArchivedFeedList from "../components/views/ArchivedFeedList";
 import { Container } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -12,10 +12,10 @@ function App() {
         <Container maxWidth="sm">
           <Switch>
             <Route exact path="/">
-              <NewsList />
+              <NewsFeedList />
             </Route>
             <Route exact path="/archived">
-              {/* <ArchivedList /> */}
+              <ArchivedFeedList />
             </Route>
           </Switch>
         </Container>
