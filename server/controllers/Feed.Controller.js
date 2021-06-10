@@ -1,5 +1,5 @@
 const FeedModel = require("../models/FeedModel");
-const FeedHelper = require("../helpers/Feed.Helper");
+// const FeedHelper = require("../../helpers/Feed.Helper");
 
 // Create Feed
 const createFeed = async (feed) => {
@@ -54,22 +54,22 @@ const archiveFeed = async (id) => {
     console.log(error);
   }
 };
+// No longer needed (commented just in case)
+// const updateFeedList = async () => {
+//   try {
+//     const newFeedList = await FeedHelper.getRssFeed();
 
-const updateFeedList = async () => {
-  try {
-    const newFeedList = await FeedHelper.getRssFeed();
+//     // check if already exist
 
-    // check if already exist
-
-    for (const feed of newFeedList) {
-      const filter = { guid: feed.guid };
-      await FeedModel.findOneAndUpdate(filter, feed, { new: true });
-    }
-    return await FeedModel.find();
-  } catch (error) {
-    console.log("UpdatedFeedlist error", error);
-  }
-};
+//     for (const feed of newFeedList) {
+//       const filter = { guid: feed.guid };
+//       await FeedModel.findOneAndUpdate(filter, feed, { new: true });
+//     }
+//     return await FeedModel.find();
+//   } catch (error) {
+//     console.log("UpdatedFeedlist error", error);
+//   }
+// };
 
 //Delete feed by Id
 const deleteFeedById = async (id) => {
@@ -84,7 +84,7 @@ module.exports = {
   getFeedList,
   getArchivedFeedList,
   createFeed,
-  updateFeedList,
+  // updateFeedList,
   archiveFeed,
   deleteFeedById,
 };
