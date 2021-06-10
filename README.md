@@ -4,7 +4,7 @@
 
 1. Clone this repository
 
-   > git clone https://github.com/hermanu/finametrix-app
+   > git clone https://github.com/hermanu/react-news-feed finametrix-app
 
 2. Navigate into the directory
 
@@ -32,7 +32,7 @@ Be patient and wait for all for all of the NPM warnings to finish.
 
 1. Clone this repository
 
-   > git clone https://github.com/hermanu/finametrix-app
+   > git clone https://github.com/hermanu/react-news-feed finametrix-app
 
 2. Navigate into the directory
 
