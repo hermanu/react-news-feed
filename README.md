@@ -56,8 +56,10 @@ React-App is running on [http://localhost:3000](http://localhost:3000)
 
 ### Anotaciones
 
-- Para realizar este proyecto utilize un boilerplate con lo minimo posible, ya que nunca habia trabajado con React anteriormente. Aun asi, he tenido que implementar un router y un context.
-- No estoy seguro que la forma correcta de hacerlo sea la que yo he utilizado, seguramente se pueda hacer todo con una peticion para recibir el listado de feeds y luego filtrarlos segun la vista en la que nos encontremos.
+- Para realizar este proyecto utilize un boilerplate con lo minimo posible, ya que nunca habia trabajado con React anteriormente. Aun asi, he tenido que implementar un router y un context y material-ui.
+- No estoy seguro que la forma correcta de hacerlo sea la que yo he utilizado, seguramente se pueda hacer todo con una peticion para recibir el listado de feeds y luego filtrarlos segun la vista en la que nos encontremos, pero no consegui hacerlo, me sentia perdido entre props y el context.
 - He intentado separar los componentes lo maximo posible, y luego el componente de la lista en las 2 vistas.
 - Solo he implementado los test de integracion (endpoints), los unitarios me estan dando muchos problemas con Jest. Hablando de Jest, tengo que utilizar el parametro --forceExit, por que no encuentro la forma de cerrar la conexion con mongo una vez se deja de utilizar.
-- Respecto a docker.compose.yml he tenido que buscar algunos ejemplos y sacar lo mejor de cada uno de ellos ya que me estaba resultando imposible montar la network necesaria (aun sigo retocando la config)
+- Respecto a docker.compose.yml he tenido que buscar algunos ejemplos y sacar lo mejor de cada uno de ellos ya que me estaba resultando imposible montar la network necesaria (aun sigo retocando la config).
+
+- Gracias por ofrecerme esta oportunidad, me ha gustado React mas de lo que esperaba, aunque al principio parecia que iba a ser todo muy complicado, una vez lo tienes todo en su sitio, es facil ir ampliando y añadir nuevo contenido.
