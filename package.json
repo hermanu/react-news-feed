@@ -10,7 +10,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest ./__tests__ --testTimeout=10000 --forceExit",
     "start": "node ./server/server.js",
-    "dev": "nodemon ./server/server.js",
+    "dev": "NODE_ENV=dev nodemon ./server/server.js",
     "client": "cd client && yarn start",
     "mern": "concurrently -n 'server,client' -c 'yellow,blue' \"yarn run dev\" \"yarn run client\"",
     "heroku-postbuild": "cd client && yarn install && yarn run build"

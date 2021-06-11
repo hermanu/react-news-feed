@@ -14,12 +14,6 @@ const feedExample = {
 
 beforeAll(() => {
   app = require("../server/server.js");
-  mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
 });
 
 describe("Feed Endpoints", () => {

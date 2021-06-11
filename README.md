@@ -40,7 +40,7 @@ Be patient and wait for all for all of the NPM warnings to finish.
 
 3. Create a .env file
 
-   > touch .env
+   > touch .env.dev
 
 4. Add MONGODB_URI param to .env file
 
@@ -55,3 +55,9 @@ NodeJs server is running on [http://localhost:5000/api/v1](http://localhost:5000
 React-App is running on [http://localhost:3000](http://localhost:3000)
 
 ### Anotaciones
+
+- Para realizar este proyecto utilize un boilerplate con lo minimo posible, ya que nunca habia trabajado con React anteriormente. Aun asi, he tenido que implementar un router y un context.
+- No estoy seguro que la forma correcta de hacerlo sea la que yo he utilizado, seguramente se pueda hacer todo con una peticion para recibir el listado de feeds y luego filtrarlos segun la vista en la que nos encontremos.
+- He intentado separar los componentes lo maximo posible, y luego el componente de la lista en las 2 vistas.
+- Solo he implementado los test de integracion (endpoints), los unitarios me estan dando muchos problemas con Jest. Hablando de Jest, tengo que utilizar el parametro --forceExit, por que no encuentro la forma de cerrar la conexion con mongo una vez se deja de utilizar.
+- Respecto a docker.compose.yml he tenido que buscar algunos ejemplos y sacar lo mejor de cada uno de ellos ya que me estaba resultando imposible montar la network necesaria (aun sigo retocando la config)

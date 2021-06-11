@@ -7,13 +7,12 @@ const mongoose = require("mongoose");
 if (process.env.NODE_ENV !== "production")
   require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
-if (process.env.NODE_ENV !== "test")
-  mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
 
