@@ -1,20 +1,21 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-if (process.env.NODE_ENV !== "production") require("dotenv").config();
+if (process.env.NODE_ENV !== "production")
+  require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+if (process.env.NODE_ENV !== "test")
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
-
-const app = express();
 
 // exclusing dotenv config from production
 
@@ -42,6 +43,10 @@ if (process.env.NODE_ENV === "production") {
 // use port from environment variables for production
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
