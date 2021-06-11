@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 
 let app;
 let currentFeed;
-let server;
 
 const feedExample = {
   title: "Test title",
